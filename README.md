@@ -6,7 +6,7 @@ import customtkinter as ctk
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 # seting up FAQ dataset
-# we can expand this dictionary with any questions and answers relevant to our topic.
+
 FAQ_DATA = {
     "What is your return policy?":
         "You can return any product within 30 days of purchase for a full refund. Items must be in their original packaging.",
@@ -21,14 +21,14 @@ FAQ_DATA = {
     "How do I contact customer support?":
         "You can reach our support team via email at support@example.com or call us at 1-800-555-0199 between 9 AM and 5 PM EST."
 }
-# Extract questions into a list for semantic comparison
+
 FAQ_QUESTIONS = list(FAQ_DATA.keys())
 print("Loading NLP Model... (This may take a moment on the first run)")
-# Load a lightweight, high-performance embedding model
+
 model = SentenceTransformer('all-MiniLM-L6-v2')
-# Pre-compute embeddings for all of our known FAQ questions
+
 FAQ_EMBEDDINGS = model.encode(FAQ_QUESTIONS)
-# NLP matching
+
 def get_bot_response(user_query):
     """Finds the closest matching FAQ question using cosine similarity."""
     if not user_query.strip():
@@ -47,7 +47,7 @@ def get_bot_response(user_query):
         return FAQ_DATA[matched_question]
     else:
         return "I'm sorry, I couldn't find an exact match for that question. Could you try rephrasing it, or contact our support team at support@example.com?"
-# chat interactive UI (CustomTkinter)
+
 class ChatbotWindow(ctk.CTk):
     def __init__(self):
         super().__init__()
